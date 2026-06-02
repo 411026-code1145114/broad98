@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>背單字卡片</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header>
+      <div class="brand">
+        <h1>背單字 App</h1>
+        <p>點擊卡片翻面，管理自己的單字庫。</p>
+      </div>
+      <nav>
+        <button class="tab-btn active" data-view="flashcard">單字卡</button>
+        <button class="tab-btn" data-view="manager">管理頁面</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="flashcard-view" class="view active">
+        <div class="flashcard-area">
+          <div class="flashcard" id="flashcard" tabindex="0" aria-label="點擊翻轉單字卡片">
+            <div class="card-face card-front" id="card-front">
+              <span class="card-label">English</span>
+              <h2 id="card-word">Loading...</h2>
+            </div>
+            <div class="card-face card-back" id="card-back">
+              <span class="card-label">中文資訊</span>
+              <div class="card-back-content">
+                <p><strong>翻譯：</strong><span id="card-translation">---</span></p>
+                <p><strong>詞性：</strong><span id="card-pos">---</span></p>
+                <p><strong>例句：</strong><span id="card-example">---</span></p>
+                <p><strong>字根分析：</strong><span id="card-root">---</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button id="prev-card">上一張</button>
+            <button id="next-card">下一張</button>
+          </div>
+        </div>
+
+        <aside class="word-panel">
+          <div class="panel-header">
+            <h2>單字清單</h2>
+            <span id="word-count"></span>
+          </div>
+          <ul id="word-list" class="word-list"></ul>
+        </aside>
+      </section>
+
+      <section id="manager-view" class="view">
+        <div class="manager-grid">
+          <div class="form-card">
+            <h2>新增 / 更新單字</h2>
+            <div class="input-group">
+              <label for="input-word">英文單字</label>
+              <input id="input-word" type="text" placeholder="輸入英文單字" />
+            </div>
+            <div class="input-group">
+              <label for="input-translation">翻譯</label>
+              <input id="input-translation" type="text" placeholder="輸入翻譯" />
+            </div>
+            <div class="input-group">
+              <label for="input-pos">詞性</label>
+              <input id="input-pos" type="text" placeholder="輸入詞性" />
+            </div>
+            <div class="input-group">
+              <label for="input-example">例句</label>
+              <textarea id="input-example" rows="3" placeholder="輸入例句"></textarea>
+            </div>
+            <div class="input-group">
+              <label for="input-root">字根分析</label>
+              <textarea id="input-root" rows="3" placeholder="輸入字根分析"></textarea>
+            </div>
+            <div class="button-row">
+              <button id="auto-fill">自動填入</button>
+              <button id="save-word">儲存單字</button>
+              <button id="clear-form" class="secondary">清空欄位</button>
+            </div>
+            <p class="hint">「自動填入」會嘗試從網路辭典抓取詞性與例句，並翻譯英文單字。</p>
+          </div>
+
+          <div class="db-card">
+            <h2>我的單字庫</h2>
+            <p>點擊單字可切換卡片，右側按鈕可刪除。</p>
+            <ul id="manager-list" class="manager-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
