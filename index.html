@@ -6,96 +6,96 @@
   <title>背單字卡片</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <div class="app-shell">
-    <header>
-      <div class="brand">
-        <h1>背單字 App</h1>
-        <p>點擊卡片翻面，管理自己的單字庫。</p>
+<body class="min-h-screen bg-bg text-text antialiased">
+  <div class="app-shell mx-auto max-w-6xl px-6 py-8">
+    <header class="flex flex-wrap justify-between items-center gap-5 mb-6">
+      <div class="brand space-y-2">
+        <h1 class="text-4xl font-semibold tracking-tight">背單字 App</h1>
+        <p class="text-sm text-muted">點擊卡片翻面，管理自己的單字庫。</p>
       </div>
-      <nav>
-        <button class="tab-btn active" data-view="flashcard">單字卡</button>
-        <button class="tab-btn" data-view="manager">管理頁面</button>
+      <nav class="flex gap-3">
+        <button class="tab-btn active inline-flex items-center rounded-full border border-border bg-surface/90 px-5 py-2 text-sm font-semibold text-text shadow-soft transition duration-200 ease-out hover:border-primary hover:text-text focus:outline-none focus:ring-2 focus:ring-primary/40" data-view="flashcard">單字卡</button>
+        <button class="tab-btn inline-flex items-center rounded-full border border-transparent bg-transparent px-5 py-2 text-sm font-semibold text-muted transition duration-200 ease-out hover:border-border hover:text-text focus:outline-none focus:ring-2 focus:ring-primary/40" data-view="manager">管理頁面</button>
       </nav>
     </header>
 
-    <main>
-      <section id="flashcard-view" class="view active">
-        <div class="flashcard-area">
-          <div class="flashcard" id="flashcard" tabindex="0" aria-label="點擊翻轉單字卡片">
-            <div class="card-face card-front" id="card-front">
-              <span class="card-label">English</span>
-              <h2 id="card-word">Loading...</h2>
+    <main class="grid gap-6">
+      <section id="flashcard-view" class="view active grid gap-6 lg:grid-cols-[1fr_auto]">
+        <div class="flashcard-area grid gap-6 justify-items-center">
+          <div class="flashcard relative w-full max-w-[380px] h-[420px] perspective-[1400px]" id="flashcard" tabindex="0" aria-label="點擊翻轉單字卡片">
+            <div class="card-face card-front absolute inset-0 rounded-[30px] bg-surface/95 border border-border p-8 grid gap-6 backface-visibility-hidden transform-style-preserve-3d items-center justify-items-center" id="card-front">
+              <span class="card-label text-sm uppercase tracking-[0.3em] text-muted">English</span>
+              <h2 id="card-word" class="text-5xl font-semibold">Loading...</h2>
             </div>
-            <div class="card-face card-back" id="card-back">
-              <span class="card-label">中文資訊</span>
-              <div class="card-back-content">
-                <p><strong>翻譯：</strong><span id="card-translation">---</span></p>
-                <p><strong>詞性：</strong><span id="card-pos">---</span></p>
-                <p><strong>例句：</strong><span id="card-example">---</span></p>
-                <p><strong>字根分析：</strong><span id="card-root">---</span></p>
+            <div class="card-face card-back absolute inset-0 rounded-[30px] bg-surface/95 border border-border p-8 grid gap-6 backface-visibility-hidden transform-style-preserve-3d rotate-y-180" id="card-back">
+              <span class="card-label text-sm uppercase tracking-[0.3em] text-muted">中文資訊</span>
+              <div class="card-back-content grid gap-4 overflow-y-auto max-h-[300px]">
+                <p class="m-0 leading-7"><strong>翻譯：</strong><span id="card-translation">---</span></p>
+                <p class="m-0 leading-7"><strong>詞性：</strong><span id="card-pos">---</span></p>
+                <p class="m-0 leading-7"><strong>例句：</strong><span id="card-example">---</span></p>
+                <p class="m-0 leading-7"><strong>字根分析：</strong><span id="card-root">---</span></p>
               </div>
             </div>
           </div>
 
-          <div class="card-actions">
-            <button id="prev-card">上一張</button>
-            <button id="next-card">下一張</button>
+          <div class="card-actions grid w-full gap-3 sm:grid-cols-2">
+            <button id="prev-card" class="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong">上一張</button>
+            <button id="next-card" class="rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong">下一張</button>
           </div>
         </div>
 
-        <aside class="word-panel">
-          <div class="panel-header">
-            <h2>單字清單</h2>
-            <span id="word-count"></span>
+        <aside class="word-panel w-full max-w-[380px] rounded-[28px] border border-border bg-surface/95 p-6 shadow-soft">
+          <div class="panel-header flex items-baseline justify-between gap-3">
+            <h2 class="m-0 text-xl font-semibold">單字清單</h2>
+            <span id="word-count" class="text-sm text-muted"></span>
           </div>
-          <ul id="word-list" class="word-list"></ul>
+          <ul id="word-list" class="word-list grid gap-3 list-none m-0 p-0"></ul>
         </aside>
       </section>
 
-      <section id="manager-view" class="view">
-        <div class="manager-grid">
-          <div class="form-card">
-            <h2>新增 / 更新單字</h2>
-            <div class="input-group">
-              <label for="input-word">英文單字</label>
-              <input id="input-word" type="text" placeholder="輸入英文單字" />
+      <section id="manager-view" class="view hidden">
+        <div class="manager-grid grid gap-6 lg:grid-cols-[1.25fr_0.9fr]">
+          <div class="form-card rounded-[30px] border border-border bg-surface/95 p-7 shadow-soft">
+            <h2 class="m-0 mb-5 text-2xl font-semibold">新增 / 更新單字</h2>
+            <div class="input-group grid gap-2 mb-4">
+              <label for="input-word" class="font-semibold">英文單字</label>
+              <input id="input-word" type="text" placeholder="輸入英文單字" class="w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15" />
             </div>
-            <div class="input-group">
-              <label for="input-translation">翻譯</label>
-              <input id="input-translation" type="text" placeholder="輸入翻譯" />
+            <div class="input-group grid gap-2 mb-4">
+              <label for="input-translation" class="font-semibold">翻譯</label>
+              <input id="input-translation" type="text" placeholder="輸入翻譯" class="w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15" />
             </div>
-            <div class="input-group">
-              <label for="input-pos">詞性</label>
-              <input id="input-pos" type="text" placeholder="輸入詞性" />
+            <div class="input-group grid gap-2 mb-4">
+              <label for="input-pos" class="font-semibold">詞性</label>
+              <input id="input-pos" type="text" placeholder="輸入詞性" class="w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15" />
             </div>
-            <div class="input-group">
-              <label for="input-example">例句</label>
-              <textarea id="input-example" rows="3" placeholder="輸入例句"></textarea>
+            <div class="input-group grid gap-2 mb-4">
+              <label for="input-example" class="font-semibold">例句</label>
+              <textarea id="input-example" rows="3" placeholder="輸入例句" class="w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15"></textarea>
             </div>
-            <div class="input-group">
-              <label for="input-root">字根分析</label>
-              <textarea id="input-root" rows="3" placeholder="輸入字根分析"></textarea>
+            <div class="input-group grid gap-2 mb-4">
+              <label for="input-root" class="font-semibold">字根分析</label>
+              <textarea id="input-root" rows="3" placeholder="輸入字根分析" class="w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15"></textarea>
             </div>
-            <div class="button-row">
-              <button id="auto-fill">自動填入</button>
-              <button id="save-word">儲存單字</button>
-              <button id="clear-form" class="secondary">清空欄位</button>
+            <div class="button-row grid gap-3 sm:grid-cols-3">
+              <button id="auto-fill" class="rounded-full bg-primary px-4 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong">自動填入</button>
+              <button id="save-word" class="rounded-full bg-primary px-4 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong">儲存單字</button>
+              <button id="clear-form" class="rounded-full bg-white/5 px-4 py-3 text-sm font-semibold text-text transition duration-200 ease-out hover:bg-surface/80">清空欄位</button>
             </div>
-            <p class="hint">「自動填入」會嘗試從網路辭典抓取詞性與例句，並翻譯英文單字。</p>
+            <p class="hint mt-4 text-sm text-muted">「自動填入」會嘗試從網路辭典抓取詞性與例句，並翻譯英文單字。</p>
           </div>
 
-          <div class="db-card">
-            <h2>我的單字庫</h2>
-            <p>點擊單字可切換卡片，右側按鈕可刪除。</p>
-            <ul id="manager-list" class="manager-list"></ul>
+          <div class="db-card rounded-[30px] border border-border bg-surface/95 p-7 shadow-soft">
+            <h2 class="m-0 mb-4 text-2xl font-semibold">我的單字庫</h2>
+            <p class="text-sm text-muted">點擊單字可切換卡片，右側按鈕可刪除。</p>
+            <ul id="manager-list" class="manager-list grid gap-3 list-none m-0 p-0"></ul>
           </div>
         </div>
       </section>
     </main>
   </div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="toast" class="toast fixed left-1/2 bottom-6 z-50 -translate-x-1/2 rounded-full bg-surface/95 px-5 py-3 text-sm text-text opacity-0 transition-opacity duration-200" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>

@@ -1,355 +1,214 @@
-:root {
-  --bg: #f4f7fb;
-  --surface: #ffffff;
-  --text: #102a43;
-  --muted: #617d98;
-  --primary: #3867d6;
-  --primary-strong: #1f4ab5;
-  --danger: #e63946;
-  --border: rgba(16, 42, 67, 0.12);
-  --shadow: 0 20px 60px rgba(16, 42, 67, 0.08);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  box-sizing: border-box;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-html, body {
-  margin: 0;
-  min-height: 100%;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #eef5ff 0%, var(--bg) 45%);
-  color: var(--text);
-}
-
-button, input, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.app-shell {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 24px 18px 48px;
-}
-
-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.brand h1 {
-  margin: 0;
-  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
-}
-
-.brand p {
-  margin: 8px 0 0;
-  color: var(--muted);
-}
-
-nav {
-  display: flex;
-  gap: 10px;
-}
-
-.tab-btn {
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background: transparent;
-  padding: 10px 18px;
-  color: var(--muted);
-  transition: all 0.2s ease;
-}
-
-.tab-btn.active {
-  background: #ffffff;
-  color: var(--text);
-  border-color: var(--border);
-  box-shadow: var(--shadow);
-}
-
-main {
-  display: grid;
-}
-
-.view {
-  display: none;
-}
-
-.view.active {
-  display: grid;
-  gap: 20px;
-}
-
-.flashcard-area {
-  display: grid;
-  gap: 22px;
-  justify-items: center;
-}
-
-.flashcard {
-  width: min(380px, 100%);
-  height: 420px;
-  position: relative;
-  perspective: 1400px;
-  border-radius: 30px;
-}
-
-.flashcard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(225,235,248,0.9));
-  box-shadow: var(--shadow);
-}
-
-.card-face {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 30px;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 32px;
-  display: grid;
-  gap: 18px;
-}
-
-.card-front {
-  align-content: center;
-  justify-items: center;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-}
-
-.flashcard.flipped .card-front {
-  transform: rotateY(180deg);
-}
-
-.flashcard.flipped .card-back {
-  transform: rotateY(360deg);
-}
-
-.flashcard:hover {
-  transform: translateY(-4px);
-}
-
-.flashcard, .card-face {
-  transition: transform 0.65s ease;
-}
-
-.card-label {
-  color: var(--muted);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-}
-
-.card-front h2 {
-  font-size: clamp(2.4rem, 4vw, 3.5rem);
-  margin: 0;
-}
-
-.card-back-content {
-  display: grid;
-  gap: 14px;
-  overflow-y: auto;
-  max-height: 300px;
-}
-
-.card-back-content p {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.card-actions {
-  display: flex;
-  gap: 12px;
-}
-
-.card-actions button {
-  flex: 1;
-  border: none;
-  border-radius: 999px;
-  background: var(--primary);
-  color: #fff;
-  padding: 14px 18px;
-  transition: background 0.2s ease;
-}
-
-.card-actions button:hover {
-  background: var(--primary-strong);
-}
-
-.word-panel {
-  max-width: 380px;
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 22px;
-  box-shadow: var(--shadow);
-}
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.word-panel h2 {
-  margin: 0 0 12px;
-}
-
-.word-list,
-.manager-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 10px;
-}
-
-.word-list li,
-.manager-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px;
-  border-radius: 18px;
-  background: #f9fbff;
-  border: 1px solid rgba(56, 103, 214, 0.12);
-}
-
-.word-list li button,
-.manager-list li button {
-  border: none;
-  background: transparent;
-  color: var(--danger);
-  font-weight: 700;
-}
-
-.manager-grid {
-  display: grid;
-  grid-template-columns: 1.25fr 0.9fr;
-  gap: 20px;
-}
-
-.form-card,
-.db-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  padding: 28px;
-  box-shadow: var(--shadow);
-}
-
-.form-card h2,
-.db-card h2 {
-  margin-top: 0;
-}
-
-.input-group {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.input-group label {
-  font-weight: 600;
-}
-
-.input-group input,
-.input-group textarea {
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: #f7f9fc;
-  padding: 14px 16px;
-  color: var(--text);
-  resize: vertical;
-}
-
-.button-row {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.button-row button {
-  border: none;
-  border-radius: 999px;
-  padding: 14px 18px;
-  background: var(--primary);
-  color: #fff;
-  transition: transform 0.15s ease, background 0.2s ease;
-}
-
-.button-row button:hover {
-  transform: translateY(-1px);
-}
-
-.button-row .secondary {
-  background: #e8eef8;
-  color: var(--text);
-}
-
-.hint {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-top: 16px;
-}
-
-.toast {
-  position: fixed;
-  left: 50%;
-  bottom: 24px;
-  transform: translateX(-50%);
-  background: rgba(16, 42, 67, 0.92);
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 999px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-  z-index: 20;
-}
-
-.toast.show {
-  opacity: 1;
-}
-
-@media (max-width: 900px) {
-  .manager-grid {
-    grid-template-columns: 1fr;
+  body {
+    @apply min-h-screen bg-bg text-text antialiased;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
 
-@media (max-width: 640px) {
+@layer components {
   .app-shell {
-    padding: 18px 14px 36px;
+    @apply mx-auto max-w-6xl px-6 py-8;
   }
 
-  .card-actions,
-  .button-row {
-    grid-template-columns: 1fr;
+  header {
+    @apply flex flex-wrap justify-between items-center gap-5 mb-6;
+  }
+
+  .brand h1 {
+    @apply text-4xl font-semibold tracking-tight;
+  }
+
+  .brand p {
+    @apply text-sm text-muted;
+  }
+
+  nav {
+    @apply flex gap-3;
+  }
+
+  .tab-btn {
+    @apply inline-flex items-center rounded-full border border-transparent bg-transparent px-5 py-2 text-sm font-semibold text-muted transition duration-200 ease-out hover:border-border hover:text-text focus:outline-none focus:ring-2 focus:ring-primary/40;
+  }
+
+  .tab-btn.active {
+    @apply bg-surface/90 text-text border-border shadow-soft;
+  }
+
+  main {
+    @apply grid;
+  }
+
+  .view {
+    @apply hidden gap-6;
+  }
+
+  .view.active {
+    @apply grid;
+  }
+
+  .flashcard-area {
+    @apply grid gap-6 justify-items-center;
   }
 
   .flashcard {
-    height: 360px;
+    @apply relative w-full max-w-[380px] h-[420px] perspective-[1400px];
+  }
+
+  .flashcard::before {
+    content: "";
+    @apply absolute inset-0 rounded-[30px] bg-white/5 shadow-soft;
+  }
+
+  .card-face {
+    @apply absolute inset-0 rounded-[30px] bg-surface/95 border border-border p-8 grid gap-6 transition-transform duration-700 ease-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+  }
+
+  .card-front {
+    @apply items-center justify-items-center;
+  }
+
+  .card-back {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard.flipped .card-front {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard.flipped .card-back {
+    transform: rotateY(360deg);
+  }
+
+  .card-label {
+    @apply text-sm uppercase tracking-[0.3em] text-muted;
+  }
+
+  .card-front h2 {
+    @apply text-5xl font-semibold;
+  }
+
+  .card-back-content {
+    @apply grid gap-4 overflow-y-auto max-h-[300px];
+  }
+
+  .card-back-content p {
+    @apply m-0 leading-7;
+  }
+
+  .card-actions {
+    @apply grid w-full gap-3 sm:grid-cols-2;
+  }
+
+  .card-actions button {
+    @apply rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong;
+  }
+
+  .word-panel {
+    @apply w-full max-w-[380px] rounded-[28px] border border-border bg-surface/95 p-6 shadow-soft;
+  }
+
+  .panel-header {
+    @apply flex items-baseline justify-between gap-3;
+  }
+
+  .word-panel h2 {
+    @apply m-0 text-xl font-semibold;
+  }
+
+  .word-list,
+  .manager-list {
+    @apply grid gap-3 list-none m-0 p-0;
+  }
+
+  .word-list li,
+  .manager-list li {
+    @apply flex items-center justify-between rounded-2xl border border-primary/10 bg-white/5 px-4 py-3;
+  }
+
+  .word-list li button,
+  .manager-list li button {
+    @apply bg-transparent text-danger font-semibold;
+  }
+
+  .manager-grid {
+    @apply grid gap-6 lg:grid-cols-[1.25fr_0.9fr];
+  }
+
+  .form-card,
+  .db-card {
+    @apply rounded-[30px] border border-border bg-surface/95 p-7 shadow-soft;
+  }
+
+  .form-card h2,
+  .db-card h2 {
+    @apply m-0 mb-5 text-2xl font-semibold;
+  }
+
+  .input-group {
+    @apply grid gap-2 mb-4;
+  }
+
+  .input-group label {
+    @apply font-semibold;
+  }
+
+  .input-group input,
+  .input-group textarea {
+    @apply w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15;
+  }
+
+  .button-row {
+    @apply grid gap-3 sm:grid-cols-3;
+  }
+
+  .button-row button {
+    @apply rounded-full bg-primary px-4 py-3 text-sm font-semibold text-white transition duration-200 ease-out hover:bg-primary-strong;
+  }
+
+  .button-row .secondary {
+    @apply rounded-full bg-white/5 text-text;
+  }
+
+  .hint {
+    @apply mt-4 text-sm text-muted;
+  }
+
+  .toast {
+    @apply fixed left-1/2 bottom-6 z-50 -translate-x-1/2 rounded-full bg-surface/95 px-5 py-3 text-sm text-text opacity-0 transition-opacity duration-200;
+  }
+
+  .toast.show {
+    @apply opacity-100;
+  }
+
+  @media (max-width: 900px) {
+    .manager-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .app-shell {
+      @apply px-4 py-6;
+    }
+
+    .card-actions,
+    .button-row {
+      grid-template-columns: 1fr;
+    }
+
+    .flashcard {
+      @apply h-[360px];
+    }
   }
 }
