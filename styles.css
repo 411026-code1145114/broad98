@@ -10,6 +10,7 @@
   body {
     @apply min-h-screen bg-bg text-text antialiased;
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-image: radial-gradient(circle at top, rgba(139, 233, 253, 0.10), transparent 28%), radial-gradient(circle at right, rgba(192, 132, 252, 0.10), transparent 24%), linear-gradient(140deg, #04070d 0%, #07111f 35%, #0f172a 100%);
   }
 }
 
@@ -39,7 +40,7 @@
   }
 
   .tab-btn.active {
-    @apply bg-surface/90 text-text border-border shadow-soft;
+    @apply bg-surface/[0.90] text-text border-border shadow-soft;
   }
 
   main {
@@ -59,16 +60,18 @@
   }
 
   .flashcard {
-    @apply relative w-full max-w-[380px] h-[420px] perspective-[1400px];
+    @apply relative w-full max-w-[380px] h-[420px];
+    perspective: 1400px;
   }
 
   .flashcard::before {
     content: "";
-    @apply absolute inset-0 rounded-[30px] bg-white/5 shadow-soft;
+    @apply absolute inset-0 rounded-[30px] bg-white/[0.06] shadow-soft;
+    backdrop-filter: blur(18px);
   }
 
   .card-face {
-    @apply absolute inset-0 rounded-[30px] bg-surface/95 border border-border p-8 grid gap-6 transition-transform duration-700 ease-out;
+    @apply absolute inset-0 rounded-[30px] border border-white/[0.10] bg-white/[0.08] p-8 grid gap-6 transition-transform duration-700 ease-out;
     backface-visibility: hidden;
     transform-style: preserve-3d;
   }
@@ -114,7 +117,7 @@
   }
 
   .word-panel {
-    @apply w-full max-w-[380px] rounded-[28px] border border-border bg-surface/95 p-6 shadow-soft;
+    @apply w-full max-w-[380px] rounded-[28px] border border-border bg-surface/[0.95] p-6 shadow-soft;
   }
 
   .panel-header {
@@ -132,7 +135,7 @@
 
   .word-list li,
   .manager-list li {
-    @apply flex items-center justify-between rounded-2xl border border-primary/10 bg-white/5 px-4 py-3;
+    @apply flex items-center justify-between rounded-2xl border border-white/[0.10] bg-white/[0.08] px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)];
   }
 
   .word-list li button,
@@ -146,7 +149,7 @@
 
   .form-card,
   .db-card {
-    @apply rounded-[30px] border border-border bg-surface/95 p-7 shadow-soft;
+    @apply rounded-[30px] border border-white/[0.10] bg-surface/[0.70] p-7 shadow-soft backdrop-blur-2xl;
   }
 
   .form-card h2,
@@ -164,7 +167,7 @@
 
   .input-group input,
   .input-group textarea {
-    @apply w-full rounded-2xl border border-border bg-white/5 px-4 py-3 text-text outline-none transition duration-200 ease-out focus:border-primary focus:ring-2 focus:ring-primary/15;
+    @apply w-full rounded-2xl border border-white/[0.10] bg-white/[0.08] px-4 py-3 text-text outline-none transition duration-200 ease-out placeholder:text-slate-300/[0.70] focus:border-primary/[0.60] focus:bg-white/[0.10] focus:ring-2 focus:ring-primary/[0.20];
   }
 
   .button-row {
@@ -176,7 +179,7 @@
   }
 
   .button-row .secondary {
-    @apply rounded-full bg-white/5 text-text;
+    @apply rounded-full bg-white/[0.05] text-text;
   }
 
   .hint {
@@ -184,7 +187,7 @@
   }
 
   .toast {
-    @apply fixed left-1/2 bottom-6 z-50 -translate-x-1/2 rounded-full bg-surface/95 px-5 py-3 text-sm text-text opacity-0 transition-opacity duration-200;
+    @apply fixed left-1/2 bottom-6 z-50 -translate-x-1/2 rounded-full bg-surface/[0.95] px-5 py-3 text-sm text-text opacity-0 transition-opacity duration-200;
   }
 
   .toast.show {

@@ -1,0 +1,25 @@
+{
+  "name": "broad98",
+  "version": "1.0.0",
+  "description": "這是一個純前端單字背誦應用，使用 `index.html`、`styles.css` 與 `app.js` 開發。開啟 `index.html` 即可使用卡片翻轉練習和管理單字資料。",
+  "main": "app.js",
+  "scripts": {
+    "build:css": "tailwindcss -i styles.css -o dist/styles.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/411026-code1145114/broad98.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/411026-code1145114/broad98/issues"
+  },
+  "homepage": "https://github.com/411026-code1145114/broad98#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
